@@ -1,4 +1,6 @@
 #!/bin/bash
+/s3 --region "${AWS_REGION}" sync s3://${AWS_BUCKET}/ /app/
+
 chown www-data:www-data /app -R
 
 if [ "$ALLOW_OVERRIDE" = "**False**" ]; then
@@ -9,6 +11,5 @@ else
 fi
 
 source /etc/apache2/envvars
-/s3 --region "${AWS_REGION}" sync s3://${AWS_BUCKET}/ /app/
 tail -F /var/log/apache2/* &
 exec apache2 -D FOREGROUND
