@@ -37,6 +37,6 @@ RUN chmod 755 /*.sh
 # Configure /app folder with sample app
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 
-EXPOSE 80
+EXPOSE 80 443
 WORKDIR /app
 CMD ["/run.sh"]
