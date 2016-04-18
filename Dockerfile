@@ -37,6 +37,11 @@ RUN chmod 755 /*.sh
 # Configure /app folder with sample app
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 
+RUN mv /etc/apache2/apache2.conf /etc/apache2/apache2.conf.dist && rm /etc/apache2/conf-enabled/* /etc/apache2/sites-enabled/*
+COPY apache2.conf /etc/apache2/apache2.conf
+# it'd be nice if we could not COPY apache2.conf until the end of the Dockerfile, but its contents are checked by PHP during compilation
+
+
 EXPOSE 80 443
 COPY apache2-foreground /usr/local/bin/
 WORKDIR /app
