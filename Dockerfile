@@ -40,5 +40,7 @@ RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 EXPOSE 80 443
 COPY apache2-foreground /usr/local/bin/
 WORKDIR /app
-CMD ["apache2-foreground"]
 
+# grr, ENTRYPOINT resets CMD now
+ENTRYPOINT ["/run.sh"]
+CMD ["apache2-foreground"]
