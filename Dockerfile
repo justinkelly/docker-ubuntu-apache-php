@@ -4,6 +4,7 @@ MAINTAINER Fernando Mayo <fernando@tutum.co>
 # Install base packages
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -yq install \
+        cron \
         curl \
         apache2 \
         libapache2-mod-php5 \
@@ -41,6 +42,15 @@ RUN mv /etc/apache2/apache2.conf /etc/apache2/apache2.conf.dist && rm /etc/apach
 COPY apache2.conf /etc/apache2/apache2.conf
 # it'd be nice if we could not COPY apache2.conf until the end of the Dockerfile, but its contents are checked by PHP during compilation
 
+#cron
+# Add crontab file in the cron directory
+ADD crontab /etc/cron.d/s3-cron
+
+# Give execution rights on the cron job
+RUN chmod 0644 /etc/cron.d/s3-cron
+
+# Create the log file to be able to run tail
+RUN touch /var/log/cron.log
 
 EXPOSE 80 443
 COPY apache2-foreground /usr/local/bin/
