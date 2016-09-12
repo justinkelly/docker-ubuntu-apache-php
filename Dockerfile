@@ -33,6 +33,7 @@ ENV AWS_SECRET_ACCESS_KEY="AWS_SECRET_ACCESS_KEY"
 # Add image configuration and scripts
 ADD s3 /s3
 ADD run.sh /run.sh
+ADD sync.sh /sync.sh
 RUN chmod 755 /*.sh
 
 # Configure /app folder with sample app
