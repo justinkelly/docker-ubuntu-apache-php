@@ -13,6 +13,6 @@ fi
 #save env variables so cron can access them - jsut AWS ones
 printenv | sed 's/^\(.*\)$/export \1/g' | grep -E "^export AWS" > /root/project_env.sh
 
-cron
+cron -f >> /var/log/cron.log 2>&1 &
 
 exec "$@"
