@@ -10,6 +10,6 @@ else
     a2enmod rewrite
 fi
 
-cron -f
+cron
 
 exec "$@"
