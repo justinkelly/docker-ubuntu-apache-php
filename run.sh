@@ -10,6 +10,9 @@ else
     a2enmod rewrite
 fi
 
+#save env variables so cron can access them - jsut AWS ones
+printenv | sed 's/^\(.*\)$/export \1/g' | grep -E "^export AWS" > /root/project_env.sh
+
 cron
 
 exec "$@"
