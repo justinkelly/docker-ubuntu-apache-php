@@ -48,7 +48,7 @@ COPY apache2.conf /etc/apache2/apache2.conf
 ADD crontab /etc/cron.d/s3-cron
 
 # Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/s3-cron
+RUN chmod +x /etc/cron.d/s3-cron
 
 # Create the log file to be able to run tail
 RUN touch /var/log/cron.log
