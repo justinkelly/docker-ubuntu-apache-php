@@ -32,7 +32,7 @@ ENV AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID"
 ENV AWS_SECRET_ACCESS_KEY="AWS_SECRET_ACCESS_KEY"
 
 # Add image configuration and scripts
-ADD s3 /s3
+#ADD s3 /s3
 ADD mc /mc
 ADD run.sh /run.sh
 ADD sync.sh /sync.sh
