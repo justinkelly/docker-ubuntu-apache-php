@@ -1,5 +1,7 @@
 #!/bin/bash
-/s3 --region "${AWS_REGION}" sync s3://${AWS_BUCKET}/ /app/
+#/s3 --region "${AWS_REGION}" sync s3://${AWS_BUCKET}/ /app/
+/mc config host add myminio ${AWS_ENDPOINT} ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY} S3v4
+/mc mirror myminio/${AWS_BUCKET}/ /app/
 
 chown www-data:www-data /app -R
 
