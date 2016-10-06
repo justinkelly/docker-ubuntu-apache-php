@@ -32,22 +32,22 @@ ENV AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID"
 ENV AWS_SECRET_ACCESS_KEY="AWS_SECRET_ACCESS_KEY"
 
 # Add image configuration and scripts
-ADD s3 /s3
-ADD mc /mc
-ADD run.sh /run.sh
-ADD sync.sh /sync.sh
+ADD /s3 /s3
+ADD /mc /mc
+ADD /run.sh /run.sh
+ADD /sync.sh /sync.sh
 RUN chmod 755 /*.sh
 
 # Configure /app folder with sample app
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 
 RUN mv /etc/apache2/apache2.conf /etc/apache2/apache2.conf.dist && rm /etc/apache2/conf-enabled/* /etc/apache2/sites-enabled/*
-COPY apache2.conf /etc/apache2/apache2.conf
+COPY /apache2.conf /etc/apache2/apache2.conf
 # it'd be nice if we could not COPY apache2.conf until the end of the Dockerfile, but its contents are checked by PHP during compilation
 
 #cron
 # Add crontab file in the cron directory
-ADD crontab /etc/cron.d/s3-cron
+ADD /crontab /etc/cron.d/s3-cron
 
 # Give execution rights on the cron job
 RUN chmod +x /etc/cron.d/s3-cron
@@ -56,7 +56,7 @@ RUN chmod +x /etc/cron.d/s3-cron
 RUN touch /var/log/cron.log
 
 EXPOSE 80 443
-COPY apache2-foreground /usr/local/bin/
+COPY /apache2-foreground /usr/local/bin/
 WORKDIR /app
 
 # grr, ENTRYPOINT resets CMD now
