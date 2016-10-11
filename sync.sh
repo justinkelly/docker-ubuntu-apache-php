@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $1 = "up" ] ; then
+if [ "$1" = "up" ] ; then
   #/s3 --region "${AWS_REGION}" sync /app/ s3://${AWS_BUCKET}/
   /mc --quiet mirror /app/ myminio/${AWS_BUCKET}/
 else
