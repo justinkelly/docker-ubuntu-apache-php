@@ -7,7 +7,7 @@ RUN apt-get update && \
         cron \
         curl \
         apache2 \
-        libapache2-mod-php5 \
+        libapache2-mod-php \
         php-mysql \
         php-sqlite \
         php-mcrypt \
