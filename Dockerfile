@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 MAINTAINER Fernando Mayo <fernando@tutum.co>
 
 # Install base packages
@@ -8,16 +8,16 @@ RUN apt-get update && \
         curl \
         apache2 \
         libapache2-mod-php5 \
-        php5-mysql \
-        php5-sqlite \
-        php5-mcrypt \
-        php5-gd \
-        php5-curl \
+        php-mysql \
+        php-sqlite \
+        php-mcrypt \
+        php-gd \
+        php-curl \
         php-pear \
         php-apc && \
     rm -rf /var/lib/apt/lists/* && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN /usr/sbin/php5enmod mcrypt
+#RUN /usr/sbin/php5enmod mcrypt
 RUN /usr/sbin/a2enmod rewrite
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
     sed -i "s|\("MaxSpareServers" * *\).*|\12|" /etc/apache2/apache2.conf && \
